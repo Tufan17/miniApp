@@ -1,0 +1,559 @@
+{
+	"info": {
+		"_postman_id": "95ad89a3-e2bd-4735-a3ee-f4f36287628c",
+		"name": "WordSoup",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21367102"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"admin@admin.com\",\n    \"password\":\"admin2025\",\n    \"rememberMe\":false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/auth/login",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW5AYWRtaW4uY29tIiwiaWQiOiI2NzhjNDZlMGM2NzVmZjZmOWY4OWMzOGQiLCJpYXQiOjE3MzcyODUwNzAsImV4cCI6MTczNzg4OTg3MH0.a6i3wMT-UIxQqGpw7SRG0LQQj40SjqwSfubbqztLyeI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/auth/logout",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Memiş Ali\",\n    \"surname\":\"Tufan\",\n    \"email\":\"tufanmemisali4@gmail.com\",\n    \"password\":\"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/auth/register",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "level",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHVmYW5tZW1pc2FsaTRAZ21haWwuY29tIiwiaWQiOiI2NzhjZTMxM2ExNzhkMjgzOTBlNzQ0NjEiLCJpYXQiOjE3MzcyODY0MTksImV4cCI6MTczNzg5MTIxOX0.J-U7WxZeCGIT-1Y_IfB0ulRUlY8RW7OTlRU2C5ySVZs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/levels",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"levels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findOne",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/levels/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"levels",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHVmYW5tZW1pc2FsaTRAZ21haWwuY29tIiwiaWQiOiI2NzhjZTMxM2ExNzhkMjgzOTBlNzQ0NjEiLCJpYXQiOjE3MzcyODY0MTksImV4cCI6MTczNzg5MTIxOX0.J-U7WxZeCGIT-1Y_IfB0ulRUlY8RW7OTlRU2C5ySVZs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/levels",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"levels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHVmYW5tZW1pc2FsaTRAZ21haWwuY29tIiwiaWQiOiI2NzhjZTMxM2ExNzhkMjgzOTBlNzQ0NjEiLCJpYXQiOjE3MzcyODY0MTksImV4cCI6MTczNzg5MTIxOX0.J-U7WxZeCGIT-1Y_IfB0ulRUlY8RW7OTlRU2C5ySVZs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/levels/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"levels",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHVmYW5tZW1pc2FsaTRAZ21haWwuY29tIiwiaWQiOiI2NzhjZTMxM2ExNzhkMjgzOTBlNzQ0NjEiLCJpYXQiOjE3MzcyODY0MTksImV4cCI6MTczNzg5MTIxOX0.J-U7WxZeCGIT-1Y_IfB0ulRUlY8RW7OTlRU2C5ySVZs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/levels/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"levels",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "role",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHVmYW5tZW1pc2FsaTRAZ21haWwuY29tIiwiaWQiOiI2NzhjZTMxM2ExNzhkMjgzOTBlNzQ0NjEiLCJpYXQiOjE3MzcyODY0MTksImV4cCI6MTczNzg5MTIxOX0.J-U7WxZeCGIT-1Y_IfB0ulRUlY8RW7OTlRU2C5ySVZs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/roles",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findOne",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/roles/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"roles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHVmYW5tZW1pc2FsaTRAZ21haWwuY29tIiwiaWQiOiI2NzhjZTMxM2ExNzhkMjgzOTBlNzQ0NjEiLCJpYXQiOjE3MzcyODY0MTksImV4cCI6MTczNzg5MTIxOX0.J-U7WxZeCGIT-1Y_IfB0ulRUlY8RW7OTlRU2C5ySVZs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/roles",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHVmYW5tZW1pc2FsaTRAZ21haWwuY29tIiwiaWQiOiI2NzhjZTMxM2ExNzhkMjgzOTBlNzQ0NjEiLCJpYXQiOjE3MzcyODY0MTksImV4cCI6MTczNzg5MTIxOX0.J-U7WxZeCGIT-1Y_IfB0ulRUlY8RW7OTlRU2C5ySVZs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/roles/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"roles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHVmYW5tZW1pc2FsaTRAZ21haWwuY29tIiwiaWQiOiI2NzhjZTMxM2ExNzhkMjgzOTBlNzQ0NjEiLCJpYXQiOjE3MzcyODY0MTksImV4cCI6MTczNzg5MTIxOX0.J-U7WxZeCGIT-1Y_IfB0ulRUlY8RW7OTlRU2C5ySVZs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/roles/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"roles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "wordSoup",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHVmYW5tZW1pc2FsaTRAZ21haWwuY29tIiwiaWQiOiI2NzhjZTMxM2ExNzhkMjgzOTBlNzQ0NjEiLCJpYXQiOjE3MzcyODY0MTksImV4cCI6MTczNzg5MTIxOX0.J-U7WxZeCGIT-1Y_IfB0ulRUlY8RW7OTlRU2C5ySVZs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/word-soups",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"word-soups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findOne",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/word-soups/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"word-soups",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHVmYW5tZW1pc2FsaTRAZ21haWwuY29tIiwiaWQiOiI2NzhjZTMxM2ExNzhkMjgzOTBlNzQ0NjEiLCJpYXQiOjE3MzcyODY0MTksImV4cCI6MTczNzg5MTIxOX0.J-U7WxZeCGIT-1Y_IfB0ulRUlY8RW7OTlRU2C5ySVZs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/levels",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"levels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHVmYW5tZW1pc2FsaTRAZ21haWwuY29tIiwiaWQiOiI2NzhjZTMxM2ExNzhkMjgzOTBlNzQ0NjEiLCJpYXQiOjE3MzcyODY0MTksImV4cCI6MTczNzg5MTIxOX0.J-U7WxZeCGIT-1Y_IfB0ulRUlY8RW7OTlRU2C5ySVZs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/word-soups/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"word-soups",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHVmYW5tZW1pc2FsaTRAZ21haWwuY29tIiwiaWQiOiI2NzhjZTMxM2ExNzhkMjgzOTBlNzQ0NjEiLCJpYXQiOjE3MzcyODY0MTksImV4cCI6MTczNzg5MTIxOX0.J-U7WxZeCGIT-1Y_IfB0ulRUlY8RW7OTlRU2C5ySVZs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/word-soups/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"word-soups",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
