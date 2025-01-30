@@ -9,7 +9,7 @@ const mongooseConnect = require('./src/configs/database');
 const path = require('path');
 
 const corsOptions = {
-  origin: ['http://localhost:3000','http://localhost:5173'],
+  origin: ['http://localhost:3000','http://localhost:5173','https://wordsoup.usgbilisim.com'],
   optionsSuccessStatus: 200
 };
 
