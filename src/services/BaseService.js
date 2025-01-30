@@ -63,7 +63,7 @@ class BaseService {
   
     async findAll(data,select,populate,sort) {
       try {
-        const query = this.model.find(data).select(select).sort(sort).lean();
+        const query = this.model.find(data).select(select).populate(populate).sort(sort).lean();
         if (Array.isArray(populate)) {
           populate.forEach(pop => {
             if (pop.path) {
@@ -85,7 +85,7 @@ class BaseService {
 
     async findOne(data,select,populate,sort) {
       try {        
-        const query = this.model.findOne(data).select(select).sort(sort).lean();
+        const query = this.model.findOne(data).select(select).populate(populate).sort(sort).lean();
         if (Array.isArray(populate)) {
           populate.forEach(pop => {
             if (pop.path) {

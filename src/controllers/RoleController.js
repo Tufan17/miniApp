@@ -1,9 +1,11 @@
+const RoleService = require("../services/RoleService");
+
 class RoleController {
 
     async findAll(req, res) {
         try {
             const roles = await RoleService.findAll();
-            return res.status(200).json({ status: true, roles });
+            return res.status(200).json(roles);
         } catch (error) {
             return res.status(500).json({ status: false, message: error.message });
         }

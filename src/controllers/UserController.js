@@ -4,7 +4,7 @@ class UserController {
     
     async findUsers(req, res) {
         try {
-            const users = await UserService.findUsers();
+            const users = await UserService.findAll({},"name surname email avatar deviceId roleId createdAt","roleId");
             return res.status(200).json(users);
         } catch (error) {
             return res.status(500).json({ error: error.message });

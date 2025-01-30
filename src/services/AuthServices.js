@@ -37,7 +37,7 @@ class AuthService {
   }
 
   async registerUser(req, res) {
-    const { email, password, name,surname, avatar } = req.body;
+    const { email, password, name,surname, avatar,deviceId } = req.body;
     const hashedPassword = hashPassword(password);
 
     if(!email || !password || !name || !surname ){
@@ -60,6 +60,7 @@ class AuthService {
       name,
       surname,
       roleId:role._id,
+      deviceId
     }
 
     const registerUser = await UserService.create(body);

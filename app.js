@@ -3,9 +3,17 @@ const dotenv = require("dotenv");
 const app = express();
 const PORT = process.env.PORT || 3000;
 dotenv.config();
+const cors = require('cors');
 
 const mongooseConnect = require('./src/configs/database');
 const path = require('path');
+
+const corsOptions = {
+  origin: ['http://localhost:3000','http://localhost:5173'],
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 
 mongooseConnect();
 
@@ -15,15 +23,15 @@ const routes = require('./src/routes');
 const RoleService = require('./src/services/RoleService');
 
 
-app.use(express.static(path.join(__dirname, 'WordSoupAdmin/dist')));
 
 
 
 app.use('/api', routes);
+app.use(express.static(path.join(__dirname, 'admin/dist')));
 
 
 app.use('*', (req, res) => {
-    const indexPath = path.join(__dirname, 'WordSoupAdmin/dist/index.html');
+    const indexPath = path.join(__dirname, 'admin/dist/index.html');
     console.log(`Index path: ${indexPath}`);
     res.sendFile(indexPath, (err) => {
         if (err) {

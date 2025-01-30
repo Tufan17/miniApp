@@ -1,5 +1,5 @@
 const LevelService = require("../services/LevelService");
-
+const ContentService = require("../services/ContentService");
 class LevelController {
     async findAll(req, res) {
         try {
@@ -19,8 +19,12 @@ class LevelController {
     }
     async create(req, res) {
         try {
+            const existKey = await LevelService.findOne({key:req.body.key});
+            if(existKey){
+                return res.status(200).json({status:false,message:"Bu Sıralamada Zaten Bir Kayıt Bulunmaktadır"});
+            }
             const level = await LevelService.create(req.body);
-            return res.status(200).json(level);
+            return res.status(200).json({status:true,message:"Sıralama Başarıyla Oluşturuldu",level});
         } catch (error) {
             return res.status(500).json({ error: error.message });
         }
@@ -35,8 +39,12 @@ class LevelController {
     }
     async delete(req, res) {
         try {
-            const level = await LevelService.delete(req.params.id);
-            return res.status(200).json(level);
+            const existContent = await ContentService.findOne({levelId:req.params.id});
+            if(existContent){
+                return res.status(200).json({status:false,message:"Bu Sıralamaya Ait İçerik Bulunmaktadır"});
+            }
+            const level = await LevelService.deleteById(req.params.id);
+            return res.status(200).json({status:true,message:"Sıralama Başarıyla Silindi",level});
         } catch (error) {
             return res.status(500).json({ error: error.message });
         }
