@@ -5,7 +5,7 @@ const seedData = require("../seeds");
 const levelRoutes = require("./LevelRoute");
 const wordSoupRoutes = require("./WordSoupRoute");
 const roleRoutes = require("./roleRoute");
-const contentRoutes = require("./contentRoute");
+const contentRoutes = require("./ContentRoute");
 const router = express.Router();
 
 router.use("/users", userRoutes);
