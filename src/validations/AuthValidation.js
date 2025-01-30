@@ -12,7 +12,6 @@ const registerValidation = Joi.object({
 const loginValidation = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
-    deviceId: Joi.string().required(),
     rememberMe: Joi.boolean().optional().default(false),
 });
 

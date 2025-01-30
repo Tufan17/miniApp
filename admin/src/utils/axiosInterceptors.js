@@ -10,6 +10,14 @@ apiAxios.interceptors.response.use(
         return response
     },
     (error) => {
+        console.log(error.response.data);
+
+        if(error.response.data.error === "Invalid token"){
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            window.location.href = "/login";
+        }
+        
         let unauthorized = error.response && error.response.status && (error.response.status == 401 || error.response.status == 403);
         if (unauthorized) {
             setTimeout(() => {

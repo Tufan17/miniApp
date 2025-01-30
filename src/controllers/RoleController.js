@@ -19,7 +19,7 @@ class RoleController {
             return res.status(500).json({ status: false, message: error.message });
         }
     }
-
+    
     async create(req, res) {
         try {
             const role = await RoleService.create(req.body);
