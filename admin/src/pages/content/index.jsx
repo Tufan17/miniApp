@@ -36,7 +36,7 @@ const ContentPage = () => {
     <Container>
       <div className="w-full flex justify-between items-center">
         <h3 className="text-xl font-bold py-4 text-gray-500 text-start w-full">
-          Leveller
+          İçerikler
         </h3>
         <CustomButton type="button"  onClick={() => navigate("create")}>Ekle</CustomButton>
       </div>

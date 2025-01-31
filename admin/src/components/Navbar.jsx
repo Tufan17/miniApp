@@ -8,22 +8,22 @@ const Navbar = () => {
     const location = useLocation();
     const list =[
         {
-            title: "Roles",
+            title: "Roller",
             icon: <SiWebauthn size={25} />,
             path: "/dashboard/roles",
         },
         {
-            title: "Users",
+            title: "Kullanıcılar",
             icon: <FaRegUser size={25} />,
             path: "/dashboard/users",
         },
         {
-            title: "Levels",
+            title: "Seviyeler",
             icon: <GiLevelThreeAdvanced size={25} />,
             path: "/dashboard/levels",
         },
         {
-            title: "Content",
+            title: "İçerikler",
             icon: <MdOutlineContentPaste size={25} />,
             path: "/dashboard/content",
         },
