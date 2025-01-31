@@ -49,6 +49,11 @@ class AuthService {
       return res.status(401).json({ message: "User already exists" });
     }
 
+    const existingUserByNickname = await UserService.findOne({nickname});
+    if (existingUserByNickname) {
+      return res.status(401).json({ message: "Nickname already exists" });
+    }
+
     const role = await RoleService.findOne({name:'user'});
     if (!role) {
       return res.status(401).json({ message: "Role not found" });
