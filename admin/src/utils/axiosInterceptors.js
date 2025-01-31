@@ -10,8 +10,6 @@ apiAxios.interceptors.response.use(
         return response
     },
     (error) => {
-        console.log(error.response.data);
-
         if(error.response.data.error === "Invalid token"){
             localStorage.removeItem("token");
             localStorage.removeItem("user");

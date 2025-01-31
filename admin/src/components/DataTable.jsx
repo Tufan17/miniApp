@@ -26,7 +26,8 @@ const DataTable = ({ data, columns, deleteFunction }) => {
   const [pageSize, setPageSize] = useState(10);
   useEffect(() => {
     if (data) {
-      setPageSize(parseInt(data.length / 10 + 1));
+      let page = data.length % 10==0?data.length/10:data.length/10 +1;
+      setPageSize(parseInt(page)); 
     }
   }, [data]);
   if (!data) return null;
@@ -60,7 +61,7 @@ const DataTable = ({ data, columns, deleteFunction }) => {
       );
     }
     if (key === "#") {
-      return index + 1;
+      return ((activePage-1)*10+index) + 1;
     }
     if (key.includes(".")) {
       const keys = key.split(".");
@@ -79,6 +80,7 @@ const DataTable = ({ data, columns, deleteFunction }) => {
         withRowBorders={false}
         stickyHeader
         stickyHeaderOffset={60}
+        verticalSpacing="sm"
       >
         <Table.Thead>
           <Table.Tr>
@@ -88,7 +90,7 @@ const DataTable = ({ data, columns, deleteFunction }) => {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          {data?.map((item, index) => (
+          {data?.slice((activePage   - 1) * 10, activePage * 10).map((item, index) => (
             <Table.Tr key={index}>
               {columns?.map((column, i) => (
                 <Table.Td key={i}>

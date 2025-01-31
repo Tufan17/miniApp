@@ -14,7 +14,7 @@ const theme = createTheme({
   });
 const LoaderComponent = () => {
   return (
-    <Center className='w-full h-full bg-gray-200'>
+    <Center className='w-full h-full min-h-150 bg-gray-200'>
          <MantineProvider theme={theme}>
       <Loader />
     </MantineProvider>

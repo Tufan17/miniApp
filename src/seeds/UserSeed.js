@@ -41,7 +41,6 @@ const UserSeed = async () => {
         ]
 
         await User.insertMany(roles);
-        console.log("Kullanıcılar eklendi!");
     } catch (error) {
         console.error(error);
     }

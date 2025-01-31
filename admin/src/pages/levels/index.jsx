@@ -7,12 +7,23 @@ import { getLevels } from "../../services/levelService";
 import LoaderComponent from "../../components/loader";
 import { toast } from "react-toastify";
 import { deleteLevel } from "../../services/levelService";
+import { useEffect } from "react";
+
 const LevelPage = () => {
     const navigate = useNavigate();
     const { data, isLoading, isError,refetch } = useQuery({
         queryKey: ["levels"],
         queryFn: getLevels,
       });
+
+      useEffect(()=>{
+        if(data){
+            localStorage.setItem("levelKey",JSON.stringify(data[data.length-1].key+1));
+        }
+      },[data]);
+
+
+
       const deleteData = async (id)=>{
         const response = await deleteLevel(id);
         if(response?.status === true){
@@ -35,19 +46,19 @@ const LevelPage = () => {
         { name: 'İşlemler',key: 'action', buttons: ['update', 'delete'] },
       ];
   return (
-    <Container>
-      <div className="w-full flex justify-between items-center">
-        <h3 className="text-xl font-bold py-4 text-gray-500 text-start w-full">
-          Leveller
-        </h3>
-        <CustomButton onClick={() => navigate("create")}>Ekle</CustomButton>
-      </div>
-      <DataTable
-        columns={columns}
-        data={data}
-        deleteFunction={deleteData}
-      />
-    </Container>
+      <Container>
+        <div className="w-full flex justify-between items-center">
+          <h3 className="text-xl font-bold py-4 text-gray-500 text-start w-full">
+            Leveller
+          </h3>
+          <CustomButton type="button" onClick={() => navigate("create")}>Ekle</CustomButton>
+        </div>
+        <DataTable
+          columns={columns}
+          data={data}
+          deleteFunction={deleteData}
+        />
+      </Container>
   );
 };
 

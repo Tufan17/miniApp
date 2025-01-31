@@ -14,7 +14,6 @@ const RoleSeed = async () => {
             description: 'User'
           });
 
-          console.log("Roller eklendi!");
     } catch (error) {
         console.error(error);
     }

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CustomButton from "../../components/Button";
 import DataTable from "../../components/DataTable";
 import { toast } from "react-toastify";
+import LoaderComponent from "../../components/loader";
 const ContentPage = () => {
     const {data, isLoading, isError, refetch} = useQuery({
         queryKey: ["contents"],
@@ -18,7 +19,9 @@ const ContentPage = () => {
         }
       }
     const navigate = useNavigate();
-    if(isLoading) return <div>Loading...</div>
+    if (isLoading) {
+      return <LoaderComponent />;
+    }
     if(isError) return <div>Error</div>
 
     const columns = [

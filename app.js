@@ -32,7 +32,6 @@ app.use(express.static(path.join(__dirname, 'admin/dist')));
 
 app.use('*', (req, res) => {
     const indexPath = path.join(__dirname, 'admin/dist/index.html');
-    console.log(`Index path: ${indexPath}`);
     res.sendFile(indexPath, (err) => {
         if (err) {
             console.error(err);

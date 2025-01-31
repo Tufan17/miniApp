@@ -4,15 +4,14 @@ import CustomButton from "../../components/Button";
 import { createContent } from "../../services/contentService";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getLevels } from "../../services/levelService";
 import LoaderComponent from "../../components/loader";
+import BackButton from "../../components/BackButon";
 const ContentCreatePage = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [levelId, setLevelId] = useState("");
-  const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   const {data:levels, isLoading} = useQuery({
     queryKey: ["levels"],
@@ -22,18 +21,18 @@ const ContentCreatePage = () => {
   const handleSubmit = async (event) => {
     setDisabled(true);
     event.preventDefault();
-    if (!name || !description) {
+    if (!name || !levelId) {
       toast.error("Lütfen tüm alanları doldurun");
       return;
     }
 
-    const response = await createContent({ name, description, levelId });
+    const response = await createContent({ name, description:description===""?"-":description, levelId });
     
     if (response?.status === true) {
       toast.success("İçerik başarıyla oluşturuldu");
-      setTimeout(() => {
-        navigate(-1);
-      }, 3000);
+      setName("");
+      setDescription("");
+      setLevelId("");
     } else {
       toast.error(response?.message);
     }
@@ -44,9 +43,12 @@ const ContentCreatePage = () => {
 
   return (
     <Container>
-      <h3 className="text-xl font-bold py-4 text-gray-500 text-start w-full">
-        İçerik Ekle
-      </h3>
+      <div className="w-full flex justify-between items-center">
+        <h3 className="text-xl font-bold py-4 text-gray-500 text-start w-full">
+          İçerik Ekle
+        </h3>
+        <BackButton/>
+      </div>
 
       <form
         onSubmit={handleSubmit}
@@ -78,7 +80,6 @@ const ContentCreatePage = () => {
             className="w-full md:w-1/2 my-2"
             label="Açıklama"
             placeholder="Açıklama"
-            required
             onChange={(e) => setDescription(e.target.value)}
             value={description}
           />

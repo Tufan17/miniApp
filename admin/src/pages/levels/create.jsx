@@ -3,8 +3,9 @@ import { TextInput, Group } from "@mantine/core";
 import CustomButton from "../../components/Button";
 import { createLevel } from "../../services/levelService";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import BackButton from "../../components/BackButon";
 const LevelCreatePage = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -12,15 +13,20 @@ const LevelCreatePage = () => {
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
 
+  useEffect(()=>{
+    setKey(JSON.parse(localStorage.getItem("levelKey"))??0);
+  },[]);
+
+
   const handleSubmit = async (event) => {
     setDisabled(true);
     event.preventDefault();
-    if (!name || !description) {
+    if (!name || !key) {
       toast.error("Lütfen tüm alanları doldurun");
       return;
     }
 
-    const response = await createLevel({ name, description, key });
+    const response = await createLevel({ name, description:description===""?"-":description, key });
     
     if (response?.status === true) {
       toast.success("Level başarıyla oluşturuldu");
@@ -35,9 +41,12 @@ const LevelCreatePage = () => {
 
   return (
     <Container>
-      <h3 className="text-xl font-bold py-4 text-gray-500 text-start w-full">
-        Level Ekle
-      </h3>
+      <div className="w-full flex justify-between items-center">
+        <h3 className="text-xl font-bold py-4 text-gray-500 text-start w-full">
+          Level Ekle
+        </h3>
+        <BackButton/>
+      </div>
 
       <form
         onSubmit={handleSubmit}
@@ -66,7 +75,6 @@ const LevelCreatePage = () => {
             className="w-full md:w-1/2 my-2"
             label="Açıklama"
             placeholder="Açıklama"
-            required
             onChange={(e) => setDescription(e.target.value)}
             value={description}
           />
