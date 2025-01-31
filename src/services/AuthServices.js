@@ -37,10 +37,10 @@ class AuthService {
   }
 
   async registerUser(req, res) {
-    const { email, password, name,surname, avatar,deviceId } = req.body;
+    const { email, password, nickname,deviceId } = req.body;
     const hashedPassword = hashPassword(password);
 
-    if(!email || !password || !name || !surname ){
+    if(!email || !password || !nickname ){
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
@@ -57,8 +57,7 @@ class AuthService {
     const body = {
       email,
       password:hashedPassword,
-      name,
-      surname,
+      nickname,
       roleId:role._id,
       deviceId
     }
