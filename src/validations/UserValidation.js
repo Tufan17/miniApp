@@ -1,7 +1,7 @@
 const Joi = require("joi");
 
 const createValidation = Joi.object({
-    name: Joi.string().required(),
+    nickname: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().required(),
     avatar: Joi.string().optional(),
@@ -9,7 +9,7 @@ const createValidation = Joi.object({
 });
 
 const updateValidation = Joi.object({
-    name: Joi.string().optional(),
+    nickname: Joi.string().optional(),
     email: Joi.string().email().optional(),
     password: Joi.string().optional(),
     avatar: Joi.string().optional(),
