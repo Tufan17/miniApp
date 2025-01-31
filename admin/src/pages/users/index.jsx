@@ -19,8 +19,7 @@ const UserPage = () => {
   }
   const columns = [
     { name: '#', key: '#' },
-    { name: 'İsim', key: 'name' },
-    { name: 'Soyisim', key: 'surname' },
+    { name: 'Nickname', key: 'nickname' },
     { name: 'Role', key: 'roleId.name' },
     { name: 'Cihaz ID', key: 'deviceId' },
     { name: 'Kayıt Tarihi', key: 'createdAt' },
