@@ -36,6 +36,38 @@ class AuthService {
     return res.status(200).json({ status: true, token, user, message: "Login successful" });
   }
 
+  async loginNicknameUser(req, res) {
+    const { nickname, password } = req.body;
+    if (!nickname || !password) {
+      return res.status(401).json({ message: "Invalid nickname or password" });
+    }
+    const user = await UserService.findOne({nickname});
+    if (!user) {
+      return res.status(401).json({ message: "Invalid nickname or password" });
+    }
+    const isPasswordValid = hashPassword(password) === user.password;
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid nickname or password" });
+    }
+
+    const token = generateAccessToken(user, "1y");
+
+    const existingToken = await TokenService.findOne({ userId: user._id });
+
+    if (existingToken) {
+      await TokenService.update(existingToken._id, { token });
+    } else {
+      await TokenService.create({ userId: user._id, token });
+    }
+
+    const tokenInDb = await TokenService.findOne({ token });
+    if (!tokenInDb) {
+      return res.status(401).json({ message: "Invalid token" });
+    }
+
+    return res.status(200).json({ status: true, token, user, message: "Login successful" });
+  }
+
   async registerUser(req, res) {
     const { email, password, nickname,deviceId } = req.body;
     const hashedPassword = hashPassword(password);

@@ -6,6 +6,7 @@ const validation = require("../middleware/validate")
 const router = express.Router();
 
 router.post("/login",validation(loginValidation),AuthService.loginUser)
+router.post("/login/nickname",validation(loginValidation),AuthService.loginNicknameUser)
 router.post("/register",validation(registerValidation),AuthService.registerUser)
 router.post("/logout",authenticate,AuthService.logoutUser)
 
