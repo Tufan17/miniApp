@@ -44,7 +44,7 @@ class UserLevelController {
             return res.status(200).json({status:true,userLevel});
         }
         const userLevel = await UserLevelService.create(body);
-        res.status(201).json({status:true,userLevel});
+        return res.status(200).json({status:true,userLevel});
     }
    
      
