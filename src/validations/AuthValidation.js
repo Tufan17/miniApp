@@ -8,6 +8,13 @@ const registerValidation = Joi.object({
     avatar: Joi.string().optional(),
 });
 
+const loginNicknameValidation = Joi.object({
+    nickname: Joi.string().required(),
+    password: Joi.string().required(),
+    rememberMe: Joi.boolean().optional(),
+    deviceId: Joi.string().optional(),
+});
+
 const loginValidation = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
@@ -15,4 +22,4 @@ const loginValidation = Joi.object({
     deviceId: Joi.string().optional(),
 });
 
-module.exports = { registerValidation, loginValidation };
+module.exports = { registerValidation, loginValidation, loginNicknameValidation };
