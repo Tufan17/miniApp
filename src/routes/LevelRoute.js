@@ -12,6 +12,7 @@ const router = express.Router();
 
 
 router.get("/",authenticate,LevelController.findAll)
+router.get("/content/:id",authenticate,LevelController.levelContent)
 router.get("/:id",authenticate,LevelController.findById)
 router.post("/",authenticate,authorized,validate(createValidation),LevelController.create)
 router.put("/:id",authenticate,authorized,validate(updateValidation),LevelController.update)

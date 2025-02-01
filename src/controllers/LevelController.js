@@ -49,6 +49,18 @@ class LevelController {
             return res.status(500).json({ error: error.message });
         }
     }
+
+    async levelContent(req, res) {
+       try {
+        const id = req.params.id;
+
+        const level = await LevelService.content(id);
+
+        return res.status(200).json(level);
+       } catch (error) {
+        return res.status(500).json({ error: error.message });
+       }
+    }
 }
 
 module.exports = new LevelController();
