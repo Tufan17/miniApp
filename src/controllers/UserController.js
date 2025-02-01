@@ -13,7 +13,7 @@ class UserController {
 
     async findUserById(req, res) {
         try {
-            const user = await UserService.findUserById(req.params.id);
+            const user = await UserService.findById(req.params.id);
             return res.status(200).json(user);
         } catch (error) {
             return res.status(500).json({ error: error.message });
