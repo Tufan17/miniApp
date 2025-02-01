@@ -10,7 +10,7 @@ const router = express.Router()
 
 
 router.get("/",authenticate,authorized,userController.findUsers)
-router.get("/:id",authenticate,authorized,userController.findUserById)
+router.get("/:id",authenticate,userController.findUserById)
 
 router.post("/",authenticate,authorized,validate(createValidation), userController.createUser)
 
