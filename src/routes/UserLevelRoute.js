@@ -11,6 +11,7 @@ const router = express.Router();
 
 
 router.get("/",authenticate,UserLevelController.findAll)
+router.get("/leadboard",authenticate,UserLevelController.leadboard)
 router.get("/:id",authenticate,UserLevelController.findById)
 router.post("/",authenticate,validate(createValidation),UserLevelController.create)
 

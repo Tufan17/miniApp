@@ -56,9 +56,39 @@ class UserLevelController {
         return maxPoint;
     }
 
+    static async leadboard(req, res) {
+        const userLevels = await UserLevelService.findAll({},"","levelId userId");
+
+        let leadboard = [];
+        let setLeadboard = {};
+
+        userLevels.forEach(userLevel => {
+            const userId = userLevel.userId._id.toString();
+            if(!setLeadboard[userId]){
+                setLeadboard[userId] = true;
+                leadboard.push({
+                    _id: userId,
+                    point: userLevel.point,
+                    nickname: userLevel.userId.nickname,
+                    avatar: userLevel.userId.avatar ?? null
+                });
+            } else {
+                const existingUser = leadboard.find(user => user._id === userId);
+                if (existingUser) {
+                    existingUser.point += userLevel.point;
+                }
+            }
+        });
+
+     
+        leadboard.sort((a,b) => b.point - a.point);
+
+        res.status(200).json(leadboard);
+    }
 
 }
 
 
 
 module.exports = UserLevelController;
+
