@@ -1,5 +1,5 @@
 import Container from "../../components/Container";
-import { TextInput, Group, Select } from "@mantine/core";
+import { TextInput, Group, Select, Textarea } from "@mantine/core";
 import CustomButton from "../../components/Button";
 import { createContent } from "../../services/contentService";
 import { toast } from "react-toastify";
@@ -67,7 +67,7 @@ const ContentCreatePage = () => {
               label: level?.name
             }))}
             />
-          <TextInput
+          <Textarea
             className="w-full md:w-1/2 my-2"
             label="İsim"
             placeholder="İsim"

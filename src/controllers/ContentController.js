@@ -23,12 +23,11 @@ class ContentController {
             if(!existLevel){
                 return res.status(200).json({status:false,message:"Seviye Bulunamadı"});
             }
-            const existContent = await ContentService.findOne({name:req.body.name});
-            if(existContent){
-                return res.status(200).json({status:false,message:"İçerik Zaten Var"});
+            const list =req.body.name.split("\n");
+            for(let i=0;i<list.length;i++){
+             await ContentService.create({name:list[i],levelId:existLevel._id});
             }
-            const content = await ContentService.create(req.body);
-            return res.status(200).json({status:true,message:"İçerik Başarıyla Oluşturuldu",content});
+            return res.status(200).json({status:true,message:"İçerik Başarıyla Oluşturuldu"});
         } catch (error) {
             return res.status(500).json({ error: error.message });
         }
