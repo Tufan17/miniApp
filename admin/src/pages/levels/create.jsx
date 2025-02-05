@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import BackButton from "../../components/BackButon";
 import { useQuery } from "@tanstack/react-query";
 import { getCefr } from "../../services/cefrService";
-import LoaderComponent from "../../components/loader";
 const LevelCreatePage = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -89,9 +88,7 @@ const LevelCreatePage = () => {
             onChange={(e) => setDescription(e.target.value)}
             value={description}
           />
-          {isLoading ? (
-            <LoaderComponent />
-          ) : (
+          {isLoading && (
             <Select
               required
               className="w-full my-2"

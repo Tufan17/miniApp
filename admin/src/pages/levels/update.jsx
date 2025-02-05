@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import LoaderComponent from "../../components/loader";
 import { getCefr } from "../../services/cefrService";
 const LevelUpdatePage = () => {
   const [name, setName] = useState("");
@@ -92,9 +91,7 @@ const LevelUpdatePage = () => {
           onChange={(e) => setDescription(e.target.value)}
           value={description}
         />
-        {isLoading ? (
-          <LoaderComponent />
-        ) : (
+        {isLoading && (
           <Select
             required
             className="w-full my-2"
