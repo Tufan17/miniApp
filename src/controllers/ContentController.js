@@ -25,7 +25,9 @@ class ContentController {
             }
             const list =req.body.name.split("\n");
             for(let i=0;i<list.length;i++){
-             await ContentService.create({name:list[i],levelId:existLevel._id});
+                if(list[i].trim() !== ""){
+                    await ContentService.create({name:list[i],levelId:existLevel._id});
+                }
             }
             return res.status(200).json({status:true,message:"İçerik Başarıyla Oluşturuldu"});
         } catch (error) {
