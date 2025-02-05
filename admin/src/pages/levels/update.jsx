@@ -91,7 +91,7 @@ const LevelUpdatePage = () => {
           onChange={(e) => setDescription(e.target.value)}
           value={description}
         />
-        {isLoading && (
+        {!isLoading && (
           <Select
             required
             className="w-full my-2"
