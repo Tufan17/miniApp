@@ -7,6 +7,7 @@ const wordSoupRoutes = require("./WordSoupRoute");
 const roleRoutes = require("./roleRoute");
 const userLevelRoutes = require("./UserLevelRoute");
 const contentRoutes = require("./ContentRoute");
+const cefrRoutes = require("./CefrRoute");
 const router = express.Router();
 
 router.use("/users", userRoutes);
@@ -16,6 +17,7 @@ router.use("/roles", roleRoutes);
 router.use("/word-soups", wordSoupRoutes);
 router.use("/contents", contentRoutes);
 router.use("/user-levels", userLevelRoutes);
+router.use("/cefrs", cefrRoutes);
 
 
 

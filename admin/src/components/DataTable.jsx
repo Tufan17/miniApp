@@ -65,9 +65,9 @@ const DataTable = ({ data, columns, deleteFunction }) => {
     }
     if (key.includes(".")) {
       const keys = key.split(".");
-      return keys.reduce((acc, curr) => acc[curr], item);
+      return item ? keys.reduce((acc, curr) => acc ? acc[curr] : null, item) : null;
     }
-    return item[key];
+    return item ? item[key] : null;
   };
   const deleteItem = async () => {
     await deleteFunction(id);
@@ -90,7 +90,7 @@ const DataTable = ({ data, columns, deleteFunction }) => {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          {data?.slice((activePage   - 1) * 10, activePage * 10).map((item, index) => (
+          {data?.length>0?data?.slice((activePage   - 1) * 10, activePage * 10).map((item, index) => (
             <Table.Tr key={index}>
               {columns?.map((column, i) => (
                 <Table.Td key={i}>
@@ -106,7 +106,13 @@ const DataTable = ({ data, columns, deleteFunction }) => {
                 </Table.Td>
               ))}
             </Table.Tr>
-          ))}
+          )):
+          <Table.Tr>
+            <Table.Td colSpan={columns?.length} className="text-center">
+              Veri bulunamadı
+            </Table.Td>
+          </Table.Tr>
+          }
         </Table.Tbody>
       </Table>
       <div className="w-full flex flex-row justify-between items-center">

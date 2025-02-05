@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa";
 import { GiLevelThreeAdvanced } from "react-icons/gi";
 import { MdOutlineContentPaste } from "react-icons/md";
+import { GrLanguage } from "react-icons/gr";
 const Navbar = () => {
     const location = useLocation();
     const list =[
@@ -17,6 +18,11 @@ const Navbar = () => {
             icon: <FaRegUser size={25} />,
             path: "/dashboard/users",
         },
+        {
+          title: "CEFR",
+          icon: <GrLanguage size={20} />,
+          path: "/dashboard/cefr",
+      },
         {
             title: "Seviyeler",
             icon: <GiLevelThreeAdvanced size={25} />,

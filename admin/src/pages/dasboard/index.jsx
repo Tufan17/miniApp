@@ -13,6 +13,9 @@ import ContentCreatePage from "../content/create";
 import ContentUpdatePage from "../content/update";
 import HomePage from "./home";
 import ErrorBoundary from "../../components/ErrorBoundary";
+import CefrPage from "../cefr";
+import CefrCreatePage from "../cefr/create";
+import CefrUpdatePage from "../cefr/update";
 const DashboardPage = () => {
   const [opened, { toggle }] = useDisclosure();
 
@@ -52,6 +55,9 @@ const DashboardPage = () => {
             <Route path="/content" element={<ContentPage />} />
             <Route path="/content/create" element={<ContentCreatePage />} />
             <Route path="/content/update/:id" element={<ContentUpdatePage />} />
+            <Route path="/cefr" element={<CefrPage />} />
+            <Route path="/cefr/create" element={<CefrCreatePage />} />
+            <Route path="/cefr/update/:id" element={<CefrUpdatePage />} />
           </Routes>
         </AppShell.Main>
       </AppShell>
