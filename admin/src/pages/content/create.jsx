@@ -3,21 +3,26 @@ import { TextInput, Group, Select, Textarea } from "@mantine/core";
 import CustomButton from "../../components/Button";
 import { createContent } from "../../services/contentService";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getLevels } from "../../services/levelService";
 import LoaderComponent from "../../components/loader";
 import BackButton from "../../components/BackButon";
+import { getCefr, getCefrLevels } from "../../services/cefrService";
 const ContentCreatePage = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [levelId, setLevelId] = useState("");
   const [disabled, setDisabled] = useState(false);
-  const {data:levels, isLoading} = useQuery({
-    queryKey: ["levels"],
-    queryFn: getLevels
+  const [cefrId, setCefrId] = useState("");
+  const {data:levels} = useQuery({
+    queryKey: ["cefrLevels", cefrId],
+    queryFn: () => getCefrLevels(cefrId),
+    enabled: !!cefrId,
   })
-
+  const {data:getCefrs,isLoading} = useQuery({
+    queryKey: ["cefrs"],
+    queryFn: getCefr
+  })
   const handleSubmit = async (event) => {
     setDisabled(true);
     event.preventDefault();
@@ -26,6 +31,7 @@ const ContentCreatePage = () => {
       return;
     }
 
+   
     const response = await createContent({ name, description:description===""?"-":description, levelId });
     
     if (response?.status === true) {
@@ -38,6 +44,10 @@ const ContentCreatePage = () => {
     }
     setDisabled(false);
   };
+
+  useEffect(()=>{
+    setLevelId(null);      
+},[cefrId])
 
   if(isLoading) return <LoaderComponent/>
 
@@ -52,11 +62,23 @@ const ContentCreatePage = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="w-full flex flex-col  items-end justify-end content-end gap-2"
+        className="w-full grid grid-cols-1 md:grid-cols-2 gap-2"
       >
-        <div className="w-full flex flex-col md:flex-row p-2 rounded-md gap-2">
+         <Select
+            className="w-full my-2"
+            label="Cefr Seviye"
+            placeholder="Cefr Seviye Seçiniz"
+            required
+            onChange={(e) => setCefrId(e)}
+            value={cefrId}
+            data={getCefrs?.map((cefr) => ({
+              value: cefr?._id,
+              label: cefr?.name
+            }))}
+            />
         <Select
-            className="w-full md:w-1/2 my-2"
+            disabled={!cefrId}
+            className="w-full my-2"
             label="Seviye"
             placeholder="Seviye Seçiniz"
             required
@@ -68,7 +90,7 @@ const ContentCreatePage = () => {
             }))}
             />
           <Textarea
-            className="w-full md:w-1/2 my-2"
+            className="w-full my-2"
             label="İsim"
             placeholder="İsim"
             required
@@ -77,13 +99,12 @@ const ContentCreatePage = () => {
           />
 
           <TextInput
-            className="w-full md:w-1/2 my-2"
+            className="w-full my-2"
             label="Açıklama"
             placeholder="Açıklama"
             onChange={(e) => setDescription(e.target.value)}
             value={description}
           />
-        </div>
 
         <Group justify="center">
           <CustomButton type="submit" disabled={disabled}>Kaydet</CustomButton>

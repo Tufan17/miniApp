@@ -1,5 +1,5 @@
 const CEFRServices = require("../services/CEFRServices");
-
+const LevelService = require("../services/LevelService");
 class CEFRController {
     async findAll(req, res) {
         try {
@@ -18,6 +18,14 @@ class CEFRController {
         }
     }
 
+    async findAllLevel(req, res) {
+        try {
+            const cefrs = await LevelService.findAll({cefrId:req.params.id},"_id name");
+            return res.status(200).json(cefrs);
+        } catch (error) {
+            return res.status(500).json({ error: error.message });
+        }
+    }
     async create(req, res) {
         try {
             const {name,key} = req.body;

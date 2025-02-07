@@ -5,9 +5,12 @@ export const getCefr = async () => {
   const response = await apiAxios.get(endpoint);
   return response.data;
 };
-
 export const getCefrById = async (id) => {
   const response = await apiAxios.get(`${endpoint}/${id}`);
+  return response.data;
+};
+export const getCefrLevels = async (id) => {
+  const response = await apiAxios.get(`${endpoint}/level/${id}`);
   return response.data;
 };
 
