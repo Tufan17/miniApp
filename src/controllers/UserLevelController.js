@@ -5,7 +5,8 @@ class UserLevelController {
     static async findAll(req, res) {
        try {
         const userId = req.user.id;
-        const levels = await LevelService.userLevel(userId);
+        const cefrId = req.query.cefrId;
+        const levels = await LevelService.userLevel(userId,cefrId);
 
         res.status(200).json(levels);
        } catch (error) {

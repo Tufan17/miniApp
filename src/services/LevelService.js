@@ -17,9 +17,11 @@ class LevelService extends BaseService {
     return data;
   }
 
-  async userLevel(userId) {
+  async userLevel(userId,cefrId) {
 
-    const allLevels = await this.findAll({},"_id key name");
+    const query = {deleteAt:false};
+    if(cefrId) query.cefrId = cefrId;
+    const allLevels = await this.findAll(query,"_id key name");
     const userLevelDetails = await Promise.all(allLevels.map(async (level) => {
       const userLevel = await UserLevelService.findOne({userId,levelId:level._id});
       return { ...level, userLevel };
