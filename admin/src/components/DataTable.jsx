@@ -62,7 +62,7 @@ const DataTable = ({ data, columns, deleteFunction, type=10 }) => {
       );
     }
     if (key === "#") {
-      return ((activePage-1)*10+index) + 1;
+      return ((activePage-1)*type+index) + 1;
     }
     if (key.includes(".")) {
       const keys = key.split(".");
