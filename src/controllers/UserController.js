@@ -45,7 +45,7 @@ class UserController {
             if(id!==userId){
                 return res.status(400).json({ error: "You cannot delete this account" });
             }
-            await UserService.deleteUser(id);
+            await UserService.deleteById(id);
             await UserLevelService.deleteAll({userId:userId});
             return res.status(200).json({ message: "User deleted" });
         } catch (error) {
