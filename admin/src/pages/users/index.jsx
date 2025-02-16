@@ -21,7 +21,6 @@ const UserPage = () => {
     { name: '#', key: '#' },
     { name: 'Nickname', key: 'nickname' },
     { name: 'Role', key: 'roleId.name' },
-    { name: 'Cihaz ID', key: 'deviceId' },
     { name: 'Kayıt Tarihi', key: 'createdAt' },
   ];
   return (

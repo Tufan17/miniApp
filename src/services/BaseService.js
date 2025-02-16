@@ -61,7 +61,7 @@ class BaseService {
       }
     }
   
-    async findAll(data,select,populate,sort) {
+    async findAll(data,select,populate,sort,introPopulate) {
       try {
         const query = this.model.find(data).select(select).populate(populate).sort(sort).lean();
         if (Array.isArray(populate)) {
@@ -73,8 +73,19 @@ class BaseService {
             }
           });
         } else if (populate) {
+          if(introPopulate){
+          query.populate({
+            path: populate, 
+            populate: {
+              path: introPopulate
+            }
+          })
+        }else{
           query.populate(populate);
         }
+      }
+       
+      
     
         const items = await query.exec();
         return items;

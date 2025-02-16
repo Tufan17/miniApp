@@ -3,7 +3,7 @@ const LevelService = require("../services/LevelService");
 class ContentController {
     async findAll(req, res) {
         try {
-            const content = await ContentService.findAll({},"","levelId",{createdAt:-1});
+            const content = await ContentService.findAll({},"","levelId",{createdAt:-1},"cefrId");
             return res.status(200).json(content);
         } catch (error) {
             return res.status(500).json({ error: error.message });
