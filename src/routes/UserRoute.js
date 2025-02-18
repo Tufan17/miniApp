@@ -14,7 +14,7 @@ router.get("/:id",authenticate,userController.findUserById)
 
 router.post("/",authenticate,authorized,validate(createValidation), userController.createUser)
 
-router.put("/:id",authenticate,authorized,validate(updateValidation),userController.updateUser)
+router.put("/:id",authenticate,validate(updateValidation),userController.updateUser)
 
 router.delete("/:id",authenticate,userController.deleteUser)
 
