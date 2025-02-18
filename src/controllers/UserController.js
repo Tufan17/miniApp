@@ -37,7 +37,7 @@ class UserController {
                     return res.status(400).json({ error: "Nickname already exists" });
                 }
             }
-            const user = await UserService.updateUser(req.params.id, req.body);
+            const user = await UserService.update(req.params.id, req.body);
             return res.status(200).json(user);
         } catch (error) {
             return res.status(500).json({ error: error.message });
