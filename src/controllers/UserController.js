@@ -31,6 +31,12 @@ class UserController {
 
     async updateUser(req, res) {
         try {
+            if(req.body.nickname){
+                const user = await UserService.findOne({nickname:req.body.nickname});
+                if(user){
+                    return res.status(400).json({ error: "Nickname already exists" });
+                }
+            }
             const user = await UserService.updateUser(req.params.id, req.body);
             return res.status(200).json(user);
         } catch (error) {
