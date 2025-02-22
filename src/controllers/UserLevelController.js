@@ -33,13 +33,14 @@ class UserLevelController {
         }
         const maxPoint = UserLevelController.maxPointCalculate(level);
 
+      
+        const existUserLevel = await UserLevelService.findOne({userId,levelId});
         const body={
             userId,
             levelId,
-            point,
+            point:point>existUserLevel.point?point:existUserLevel.point,
             maxPoint
         };
-        const existUserLevel = await UserLevelService.findOne({userId,levelId});
         if(existUserLevel){
             const userLevel = await UserLevelService.update(existUserLevel._id,body);
             return res.status(200).json({status:true,userLevel});
