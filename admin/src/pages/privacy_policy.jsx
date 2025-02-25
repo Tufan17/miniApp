@@ -67,7 +67,7 @@ const PrivacyPolicy = () => {
 
             <h5 className="text-lg font-bold">9. Contact Information</h5>
 
-            <p className="text-sm text-gray-500">For questions or requests regarding our privacy policy, you can contact us at [Email Address].</p>
+            <p className="text-sm text-gray-500">For questions or requests regarding our privacy policy, you can contact us at wordsoupsoftarge@gmail.com.</p>
         </div>
     )
 }
