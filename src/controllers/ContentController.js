@@ -24,6 +24,14 @@ class ContentController {
                 return res.status(200).json({status:false,message:"Seviye Bulunamadı"});
             }
             const list =req.body.name.split("\n");
+             if (list.length == 0) {
+                return res.status(200).json({status:false,message:"İçerik Boş Olamaz"});
+              } else if (list.length > existLevel.matrisCount) {
+                return res.status(200).json({status:false,message:"İçerik Sayısı Maksimum Kelime Sayısından Fazla Olamaz"});
+              }else if (list.some((item) => item.length > existLevel.matrisCount)) {
+                return res.status(200).json({status:false,message:"İçerik Sayısı Maksimum Harf Sayısından Fazla Olamaz"});
+              } 
+        
             for(let i=0;i<list.length;i++){
                 if(list[i].trim() !== ""){
                     await ContentService.create({name:list[i],levelId:existLevel._id});

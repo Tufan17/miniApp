@@ -20,7 +20,7 @@ class CEFRController {
 
     async findAllLevel(req, res) {
         try {
-            const cefrs = await LevelService.findAll({cefrId:req.params.id},"_id name");
+            const cefrs = await LevelService.findAll({cefrId:req.params.id},"_id name matrisCount");
             return res.status(200).json(cefrs);
         } catch (error) {
             return res.status(500).json({ error: error.message });

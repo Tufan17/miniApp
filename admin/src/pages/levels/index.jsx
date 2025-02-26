@@ -20,11 +20,8 @@ const LevelPage = () => {
   const [cefrs, setCefrs] = useState([]);
   const [selectedCefr, setSelectedCefr] = useState("");
   useEffect(() => {
-    if (data) {
-      localStorage.setItem(
-        "levelKey",
-        JSON.stringify(data[data.length - 1].key + 1)
-      );
+    if (data && data.length > 0) {
+      localStorage.setItem("levelKey", JSON.stringify(data[data.length - 1].key + 1));
       let cefrs = [];
       data.forEach((item) => {
         if (!cefrs.some((cefr) => cefr.id === item.cefrId._id)) {
@@ -32,8 +29,6 @@ const LevelPage = () => {
         }
       });
       setCefrs(cefrs);
-
-
     }
   }, [data]);
 
@@ -55,7 +50,7 @@ const LevelPage = () => {
     { name: "key", key: "key" },
     { name: "Cefr", key: "cefrId.name" },
     { name: "İsim", key: "name" },
-    { name: "Açıklama", key: "description" },
+    { name: "Matris Sayısı", key: "matrisCount" },
     { name: "Kayıt Tarihi", key: "createdAt" },
     { name: "İşlemler", key: "action", buttons: ["update", "delete"] },
   ];
@@ -86,7 +81,7 @@ const LevelPage = () => {
           </CustomButton>
         </div>
       </div>
-      <DataTable columns={columns} data={selectedCefr!="" ? data.filter((item) => item.cefrId._id === selectedCefr) : data} deleteFunction={deleteData} />
+      <DataTable columns={columns} data={selectedCefr!="" ? data?.filter((item) => item.cefrId._id === selectedCefr) : data} deleteFunction={deleteData} />
     </Container>
   );
 };

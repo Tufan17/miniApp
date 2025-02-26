@@ -10,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCefr } from "../../services/cefrService";
 const LevelCreatePage = () => {
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [matrisCount,  setMatrisCount] = useState(3);
   const [key, setKey] = useState(0);
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
@@ -27,14 +27,26 @@ const LevelCreatePage = () => {
   const handleSubmit = async (event) => {
     setDisabled(true);
     event.preventDefault();
-    if (!name || !key) {
+
+    if(matrisCount < 3){
+      toast.error("Matris sayısı en az 3 olmalıdır");
+      setDisabled(false);
+      return;
+    }
+
+    if(matrisCount > 15){
+      toast.error("Matris sayısı en fazla 15 olmalıdır");
+      setDisabled(false);
+      return;
+    }
+    if (!name || !key || !matrisCount) {
       toast.error("Lütfen tüm alanları doldurun");
       return;
     }
 
     const response = await createLevel({
       name,
-      description: description === "" ? "-" : description,
+      matrisCount,
       key,
       cefrId: cefr,
     });
@@ -82,11 +94,13 @@ const LevelCreatePage = () => {
           />
        
           <TextInput
-            className="w-full  my-2"
-            label="Açıklama"
-            placeholder="Açıklama"
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
+            type="number"
+            min={3}
+            className="w-full my-2"
+            label="Matris Sayısı"
+            placeholder="Matris Sayısı"
+            onChange={(e) => setMatrisCount(e.target.value)}
+            value={matrisCount}
           />
           {!isLoading && (
             <Select

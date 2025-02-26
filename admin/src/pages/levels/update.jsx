@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCefr } from "../../services/cefrService";
 const LevelUpdatePage = () => {
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [matrisCount, setMatrisCount] = useState(3);
   const [key, setKey] = useState(0);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -26,22 +26,23 @@ const LevelUpdatePage = () => {
   useEffect(() => {
     if (data) {
       setName(data.name);
-      setDescription(data.description);
+      setMatrisCount(data.matrisCount??3);
       setKey(data.key);
-      setCefr(data?.cefrId?._id);
+      setCefr(data?.cefrId);
     }
   }, [data]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!name || !description || !cefr) {
+    if (key < 0 || !name || matrisCount < 3 || matrisCount > 15 || !cefr) {
       toast.error("Lütfen tüm alanları doldurun");
       return;
     }
 
+    console.log(matrisCount);
     const response = await updateLevel(id, {
       name,
-      description,
+      matrisCount,
       key,
       cefrId: cefr,
     });
@@ -86,15 +87,19 @@ const LevelUpdatePage = () => {
 
         <TextInput
           className="w-full  my-2"
-          label="Açıklama"
-          placeholder="Açıklama"
-          onChange={(e) => setDescription(e.target.value)}
-          value={description}
+          label="Matris Sayısı"
+          placeholder="Matris Sayısı"
+          type="number"
+          min={3}
+          max={15}
+          onChange={(e) => setMatrisCount(e.target.value)}
+          value={matrisCount}
         />
         {!isLoading && (
           <Select
             required
             className="w-full my-2"
+            value={cefr}
             data={cefrData?.map((item) => ({
               value: item._id,
               label: item.name,

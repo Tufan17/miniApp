@@ -12,8 +12,7 @@ const UserSeed = async () => {
         const roles = [
             {
                 
-                name:'admin',
-                surname:'admin',
+                nickname:'admin',
                 email:'admin@admin.com',
                 password:HashPassword('admin2025'),
                 deviceId:uuidv4(),
@@ -26,8 +25,7 @@ const UserSeed = async () => {
               },
               {
                
-                name: 'user',
-                surname: 'user',
+                nickname: 'user',
                 email: 'user@user.com',
                 password: HashPassword('user2025'),
                 deviceId:uuidv4(),
