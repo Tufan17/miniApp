@@ -26,6 +26,10 @@ const RoleService = require('./src/services/RoleService');
 
 
 
+app.use('/app-ads.txt', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/app-ads.txt'));
+});
+
 app.use('/api', routes);
 app.use(express.static(path.join(__dirname, 'admin/dist')));
 
